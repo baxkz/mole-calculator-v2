@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mole Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="calculator-card" aria-labelledby="title">
+        <header class="header">
+          <p class="eyebrow">Chemistry helper</p>
+          <h1 id="title">Mole Calculator</h1>
+        </header>
+
+        <form id="mole-form" novalidate>
+          <div class="field-group">
+            <label for="element-count">Number of elements</label>
+            <select id="element-count" name="element-count">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div id="element-inputs" class="element-inputs" aria-live="polite"></div>
+
+          <label class="toggle-row" for="round-whole">
+            <input type="checkbox" id="round-whole" />
+            <span>Round to whole number</span>
+          </label>
+
+          <div class="actions">
+            <button type="submit" class="hidden-submit" aria-label="Calculate molar mass">Calculate</button>
+            <button type="button" class="secondary" id="reset-button">Reset</button>
+          </div>
+        </form>
+
+        <div class="result-panel" aria-live="polite">
+          <span class="result-label">Total molar mass</span>
+          <strong id="result-value">0 g/mol</strong>
+        </div>
+
+        <p id="error-message" class="error-message" role="alert" aria-live="assertive"></p>
+      </section>
+    </main>
+
+    <div class="bottom-bar" role="status" aria-live="polite">
+      <span class="bottom-bar-text" aria-label="Bottom bar text">"i need to study for the SAT instead of coding..." - baxkz, August 18, 2026 </span>
+    </div>
+
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀️</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
