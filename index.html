@@ -3,57 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mole Calculator</title>
+    <title>Mole Lab | Chemistry Calculator</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/mathlive"></script>
   </head>
   <body>
     <main class="app-shell">
-      <section class="calculator-card" aria-labelledby="title">
-        <header class="header">
-          <p class="eyebrow">Chemistry helper</p>
-          <h1 id="title">Mole Calculator</h1>
-        </header>
-
-        <form id="mole-form" novalidate>
-          <div class="field-group">
-            <label for="element-count">Number of elements</label>
-            <select id="element-count" name="element-count">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div id="element-inputs" class="element-inputs" aria-live="polite"></div>
-
-          <label class="toggle-row" for="round-whole">
-            <input type="checkbox" id="round-whole" />
-            <span>Round to whole number</span>
-          </label>
-
-          <div class="actions">
-            <button type="submit" class="hidden-submit" aria-label="Calculate molar mass">Calculate</button>
-            <button type="button" class="secondary" id="reset-button">Reset</button>
-          </div>
-        </form>
-
-        <div class="result-panel" aria-live="polite">
-          <span class="result-label">Total molar mass</span>
-          <strong id="result-value">0 g/mol</strong>
-        </div>
-
-        <p id="error-message" class="error-message" role="alert" aria-live="assertive"></p>
+      <header class="topbar">
+        <a class="brand" href="#calculator" aria-label="Mole Lab home"><span class="brand-mark">M</span><span>Mole Lab</span></a>
+      </header>
+      <section class="intro" id="calculator">
+        <div><p class="eyebrow">Pre-AP Chemistry</p><h1>Mole<br /><em>Calculator</em></h1></div>
+        <p class="intro-copy">You know what to do, just use the calculator like normal.</p>
       </section>
-    </main>
-
-    <div class="bottom-bar" role="status" aria-live="polite">
-      <span class="bottom-bar-text" aria-label="Bottom bar text">"i need to study for the SAT instead of coding..." - baxkz, August 18, 2026 </span>
-    </div>
-
-    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀️</button>
-
-    <script src="script.js"></script>
+      <nav class="mode-tabs" aria-label="Calculator mode"><button class="mode-tab is-active" type="button" data-mode="convert">Amount converter <span>01</span></button><button class="mode-tab" type="button" data-mode="mass">Molar mass <span>02</span></button></nav>
+      <section class="workspace">
+        <div class="calculator-panel">
+          <form id="calculator-form" novalidate>
+            <div class="section-heading"><span class="section-number">01</span><div><h2 id="mode-title">Convert an amount</h2><p id="mode-description">Choose what you know and what you need to find.</p></div></div>
+            <div class="conversion-grid"><div class="field-card"><label for="given-value">I have</label><div class="input-with-select"><input id="given-value" type="number" min="0" step="any" value="1" /><select id="given-unit"><option value="moles">moles</option><option value="grams">grams</option><option value="molecules">molecules</option><option value="liters">liters</option></select></div></div><div class="swap-arrow" aria-hidden="true">-&gt;</div><div class="field-card"><label for="wanted-unit">I want</label><select id="wanted-unit"><option value="grams">grams</option><option value="moles">moles</option><option value="molecules">molecules</option><option value="liters">liters</option></select></div></div>
+            <div class="formula-field" id="formula-field"><div class="label-row"><label for="formula">Compound formula</label><span>Needed for mass conversions</span></div><div class="formula-input"><math-field id="formula" aria-label="Compound formula" style="display:block;width:100%;min-height:48px;padding:10px 120px 10px 14px;border:1px solid var(--line);border-radius:6px;color:var(--ink);background:var(--paper);font-size:20px;--selection-background-color:rgba(185,213,76,.35);">H_2O</math-field><span id="formula-mass">18.015 g/mol</span></div><p class="field-hint">Use the math editor to add subscripts, superscripts, and parentheses.</p></div>
+            <div class="mass-builder" id="mass-builder" hidden><div class="label-row"><label>Build a formula</label><button type="button" class="text-button" id="add-element">+ Add element</button></div><div id="element-rows"></div></div>
+            <div class="advanced-row"><label class="check-control"><input type="checkbox" id="round-result" /><span>Round to 4 significant figures</span></label><button class="primary-button" type="submit">Calculate <span>-&gt;</span></button></div>
+          </form><p class="error-message" id="error-message" role="alert"></p>
+        </div>
+        <aside class="result-panel" aria-live="polite"><div class="result-kicker">Your result <span id="result-status">Ready</span></div><div class="result-value" id="result-value">6.022e23 <small>molecules</small></div><div class="equation-box"><span>Equation used</span><code id="equation">1 mol x 6.022e23 molecules/mol</code></div><div class="result-meta"><span>At STP</span><strong>1 mol = 22.4 L</strong></div></aside>
+      </section>
+      <section class="history-section"><div class="section-heading compact"><span class="section-number">02</span><div><h2>Recent calculations</h2><p>Your last three equations stay here for quick reference.</p></div><button type="button" class="text-button" id="clear-history">Clear all</button></div><div class="history-list" id="history-list"><div class="empty-history">Your calculation trail will appear here.</div></div></section>
+      <footer><span>AVOGADRO CONSTANT</span><strong>6.022 x 10<sup>23</sup></strong><span>MOLAR VOLUME AT STP</span><strong>22.4 L/mol</strong></footer>
+    </main><script src="script.js"></script>
   </body>
 </html>
